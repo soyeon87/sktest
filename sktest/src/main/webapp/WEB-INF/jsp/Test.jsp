@@ -69,7 +69,7 @@
 		width: 489px;
 		height: 95px;
 		margin: 10px 0 0 0;
-		background: url('../../images/img/logo.png'); no-repeat;
+		background: url('images/img/logo.png'); no-repeat;
 	 	text-indent: -9999px;
 	 	position : absolute;
 	 	left : 40px;
@@ -178,18 +178,20 @@
 	<br/>
 	<br/>
 	
-	<div class = "main" style = "background-image: url('../../images/img/back.png'); width: 1349px; height: 500px;">
-	<div class = "main" style = "background-image: url('../../images/img/Bridge.png'); width: 1300px; height: 500px;">
-		<div style="width:900px">
-		<div style="font-size:100%;color:#FFE400; position : relative; top : 25px; left : 285px;">서울특별시 종로구 종로 47 (공평동 100) SC제일은행본점빌딩 7층 :: 
-			<br/> 여성 안심 거주 지향 남성연대 대표 김규서 ::</div>
-		<div style = "position: relative; top : 55px; left : 290px;">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1583.0323915838962!2d126.94099961719!3d37.4827975842238!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f9226935fb3%3A0x3bcd2e78dee2d688!2z6rSA7JWF7IS87LiE66as7YOA7JuM!5e0!3m2!1sko!2skr!4v1427373053093" width="700px" height="400px" frameborder="0" style="border:0"></iframe>
-		</div>
+	<div class = "main" style = "background-image: url('images/img/back.png'); width: 1349px; height: 500px;">
+		<div class = "main" style = "background-image: url('images/img/Bridge.png'); width: 1300px; height: 500px;">
+			<div style="width:900px">
+				<div style="font-size:100%;color:#FFE400; position : relative; top : 25px; left : 285px;">서울특별시 종로구 종로 47 (공평동 100) SC제일은행본점빌딩 7층 :: 
+					<br/> 여성 안심 거주 지향 남성연대 대표 김규서 ::
+				</div>
+				<div style = "position: relative; top : 55px; left : 290px;">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1583.0323915838962!2d126.94099961719!3d37.4827975842238!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f9226935fb3%3A0x3bcd2e78dee2d688!2z6rSA7JWF7IS87LiE66as7YOA7JuM!5e0!3m2!1sko!2skr!4v1427373053093" width="700px" height="400px" frameborder="0" style="border:0">
+					</iframe>
+				</div>
+			</div>
 		</div>
 	</div>
-	</div>
-	<div style = "background-image: ../../images/img/back.png">
+	<div style = "background-image: ../img/back.png">
 	</div>
 	
 	<br/>
