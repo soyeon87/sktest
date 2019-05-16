@@ -1,0 +1,5 @@
+contextPath = "/sktest";
+
+$(function() {
+	/**/
+});
