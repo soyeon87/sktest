@@ -64,6 +64,7 @@
     
     
 <!-- 헤더 > 로고 -->
+<<<<<<< HEAD
    <style>
    /*
    <!-- <img alt="이미지가없어요" src="img/logo.png" width = "350" height = "200";
@@ -84,6 +85,28 @@
    </style>    
    
    
+=======
+	<style>
+	/*
+	<!-- <img alt="이미지가없어요" src="img/logo.png" width = "350" height = "200";
+		style="position: absolute;" onclick = "location.href = 'main.html'"> -->
+	*/
+		.logo {
+		float: left;
+		width: 489px;
+		height: 95px;
+		margin: 10px 0 0 0;
+		background: url('images/img/logo.png'); no-repeat;
+	 	text-indent: -9999px;
+	 	position : absolute;
+	 	left : 40px;
+	 	top : 10px;
+ 		overflow: hidden;
+ 		}
+	</style>    
+	
+	
+>>>>>>> refs/remotes/origin/master
 <!-- 헤더 > 메뉴(1) -->
     <style>
         #firstNav > ul { overflow: hidden; } 
@@ -158,6 +181,7 @@
     </style>
 </head>
 <body>
+<<<<<<< HEAD
    
    <header>
       <!-- <img alt="이미지가없어요" src="img/logo.png" width = "350" height = "200";
@@ -226,6 +250,57 @@
    부동산업 신고번호 : <font color = "orange"><b>정자동140003</b></font> 인·허가 보증보험 증권번호 : <font color = "orange"><b>100-000-201403631618</b></font> <br/> 이메일 : <font color="orange"><b>Sea31230@naver.com</b></font> 전화 : <font color="orange"><b>02-554-8763</b></font> 핸드폰 : <font color="orange"><b>010-4447-7540</b></font>
    </div>
    
+=======
+	
+	<header>
+		<!-- <img alt="이미지가없어요" src="img/logo.png" width = "350" height = "200";
+		style="position: absolute;" onclick = "location.href = 'main.html'"> -->
+		<a href= "main.html" class="logo">Logo</a>
+		
+		
+		<nav id="firstNav">
+			<ul>
+			</ul>
+		</nav>
+		<nav id="secondNav">
+			<ul>
+				<li><a href="Home.html">홈으로</a>
+				<li><a href="dlstk.html">인사말</a>
+				<li><a href="dhtl.html">오시는 길</a></li>
+				<li><a href="emdfhr.html">등록절차</a></li>
+				<li><a href="rkdlq.html">가입안내</a></li>
+				<li><a href="mail.jsp">문의하기</a></li>
+			</ul>
+		</nav>
+	</header>
+	<br/>
+	<br/>
+	
+	<div class = "main" style = "background-image: url('images/img/back.png'); width: 1349px; height: 500px;">
+		<div class = "main" style = "background-image: url('images/img/Bridge.png'); width: 1300px; height: 500px;">
+			<div style="width:900px">
+				<div style="font-size:100%;color:#FFE400; position : relative; top : 25px; left : 285px;">서울특별시 종로구 종로 47 (공평동 100) SC제일은행본점빌딩 7층 :: 
+					<br/> 여성 안심 거주 지향 남성연대 대표 김규서 ::
+				</div>
+				<div style = "position: relative; top : 55px; left : 290px;">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1583.0323915838962!2d126.94099961719!3d37.4827975842238!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f9226935fb3%3A0x3bcd2e78dee2d688!2z6rSA7JWF7IS87LiE66as7YOA7JuM!5e0!3m2!1sko!2skr!4v1427373053093" width="700px" height="400px" frameborder="0" style="border:0">
+					</iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style = "background-image: ../img/back.png">
+	</div>
+	
+	<br/>
+	<br/>
+	
+	<div align = "center" class="footer">
+	상호 : <font color="orange"><b>여성 안심 거주 플랫폼</b></font> 대표자 : <font color = "orange"><b>김규서</b></font> 사업자 등록번호 : <font color = "orange"><b>119-18-72711</b></font> <br/>
+	부동산업 신고번호 : <font color = "orange"><b>정자동140003</b></font> 인·허가 보증보험 증권번호 : <font color = "orange"><b>100-000-201403631618</b></font> <br/> 이메일 : <font color="orange"><b>Sea31230@naver.com</b></font> 전화 : <font color="orange"><b>02-554-8763</b></font> 핸드폰 : <font color="orange"><b>010-4447-7540</b></font>
+	</div>
+	
+>>>>>>> refs/remotes/origin/master
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="js/jquery.slides.min.js"></script>
    
