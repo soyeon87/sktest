@@ -4,10 +4,10 @@
 <sqlMap namespace="Test">
 
 	<select id="testDao.selectData"
-		parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
-		remapResults="true">
-			SELECT *
-			FROM TEST
-	</select>
+      parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
+      remapResults="true">
+         SELECT *
+         FROM TEST
+   	</select>
 
 </sqlMap>

@@ -3,4 +3,5 @@
 
 <sqlMapConfig>
 	<sqlMap resource="egovframework/sqlmap/Test/TEST_SQL.xml"/>
+	<sqlMap resource="egovframework/sqlmap/Test/MAP_SQL.xml"/>
 </sqlMapConfig>

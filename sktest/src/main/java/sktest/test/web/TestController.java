@@ -21,15 +21,15 @@ public class TestController {
 	@RequestMapping(value = "/main.do")
 	public String getMain(HttpServletRequest request, Model model) throws Exception{
 		Map resultMap = testService.selectData(request);
-		model.addAttribute("sk", resultMap.get("sk"));
+	    model.addAttribute("sk", resultMap.get("sk"));
 		return "/Test";
 	}
 	
-	@RequestMapping(value = "/selectData.do")
+	@RequestMapping(value = "/selectPositionData.do")
 	@ResponseBody
 	public Object selectData(HttpServletRequest request){
 		try {
-			Map resultMap = testService.selectData(request);
+			Map resultMap = testService.selectPositionData(request);
 			return resultMap;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

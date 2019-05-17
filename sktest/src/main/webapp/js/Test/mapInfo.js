@@ -6,28 +6,6 @@ var placeN = [];
 var countL = [];
 
 
-var map = new naver.maps.Map('map', {
-	   	scaleControl: false,
-		logoControl: false,
-		mapDataControl: false,
-		zoomControl: true,
-	    center: new naver.maps.LatLng(37.566612, 126.97747),
-	    zoom: 10,
-	    mapTypeControl: true
-});
-naver.maps.Event.addListener(map, 'idle', function() {
-    updateMarkers(map, make);
-});
-
-var bounds = map.getBounds(),
-southWest = bounds.getSW(),
-northEast = bounds.getNE(),
-lngSpan = northEast.lng() - southWest.lng(),
-latSpan = northEast.lat() - southWest.lat();
-
-
-
-
 function updateMarkers(map, markers) {
 
     var mapBounds = map.getBounds();

@@ -17,13 +17,23 @@ public class TestService {
 	TestDAO testDao; 
 	
 	public Map selectData(HttpServletRequest request) throws Exception{
-		//Sample
-		Map reqMap = new HashMap();
-		String option = request.getParameter("option");
-		reqMap.put("option", option);
+	      //Sample
+	      Map reqMap = new HashMap();
+	      String option = request.getParameter("option");
+	      reqMap.put("option", option);
+	      
+	      ArrayList list = (ArrayList) testDao.selectData(reqMap);
+	      reqMap.put("sk", list.get(0));
+	      return reqMap;
+	}   
+
+	
+	public Map selectPositionData(HttpServletRequest request) throws Exception{
 		
-		ArrayList list = (ArrayList) testDao.selectData(reqMap);
-		reqMap.put("sk", list.get(0));
-		return reqMap;
+	    Map reqMap = new HashMap();
+		Map resultMap = new HashMap();
+		ArrayList<Map> list = (ArrayList<Map>) testDao.selectPositionData(reqMap);
+		resultMap.put("resultList", list);
+		return resultMap;
 	}	
 }

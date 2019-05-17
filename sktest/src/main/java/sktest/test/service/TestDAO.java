@@ -20,7 +20,11 @@ public class TestDAO extends EgovAbstractDAO{
 	}
 	
 	public ArrayList<Map> selectData(Map reqMap) throws Exception{
-		return (ArrayList<Map>) list("testDao.selectData", reqMap);
+	    return (ArrayList<Map>) list("testDao.selectData", reqMap);
+	}
+
+	public ArrayList<Map> selectPositionData(Map reqMap) throws Exception{
+		return (ArrayList<Map>) list("mapDao.getPositionData", reqMap);
 	}
 	
 }
