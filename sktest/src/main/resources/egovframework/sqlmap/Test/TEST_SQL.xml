@@ -3,11 +3,32 @@
 
 <sqlMap namespace="Test">
 
-	<select id="testDao.selectData"
-      parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
-      remapResults="true">
-         SELECT *
-         FROM TEST
-   	</select>
+   	<select id="testDao.getPositionData" 
+		parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
+		remapResults="true">
+			SELECT name, concat(longitude) as grd_lo, concat(latitude) as grd_la, address
+			FROM map_position
+	</select>
 
+	<select id="testDao.getRoomData" 
+		parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
+		remapResults="true">
+			SELECT name, concat(longitude) as grd_lo, concat(latitude) as grd_la, address, image
+			FROM map_position
+			<isNotEmpty  property="location">
+       			<iterate prepend="WHERE location in" property="location" open="(" close=")" conjunction=",">
+            		#location[]#
+       			</iterate>
+  			</isNotEmpty>
+	</select>
+
+	<select id="testDao.getSubwayPosition" 
+		parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
+		remapResults="true">
+			SELECT name, latitude, longitude 
+			FROM subway_list
+			WHERE NAME LIKE concat('%',#value#,'%') 
+			LIMIT 1
+	</select>
+	
 </sqlMap>

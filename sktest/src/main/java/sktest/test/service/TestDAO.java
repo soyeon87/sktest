@@ -18,13 +18,14 @@ public class TestDAO extends EgovAbstractDAO{
 	public void setSuperSqlMapClient(SqlMapClient sqlMapClient) {
 		super.setSuperSqlMapClient(sqlMapClient);
 	}
-	
-	public ArrayList<Map> selectData(Map reqMap) throws Exception{
-	    return (ArrayList<Map>) list("testDao.selectData", reqMap);
-	}
 
 	public ArrayList<Map> selectPositionData(Map reqMap) throws Exception{
-		return (ArrayList<Map>) list("mapDao.getPositionData", reqMap);
+		return (ArrayList<Map>) list("testDao.getPositionData", reqMap);
 	}
-	
+	public ArrayList<Map> selectRoomData(Map reqMap) throws Exception{
+		return (ArrayList<Map>) list("testDao.getRoomData", reqMap);
+	}
+	public ArrayList<Map> selectSubwayPosition(Map reqMap) throws Exception{
+		return (ArrayList<Map>) list("testDao.getSubwayPosition", reqMap);
+	}
 }

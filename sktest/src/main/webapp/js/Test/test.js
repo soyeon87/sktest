@@ -1,7 +1,45 @@
 contextPath = "/sktest";
 
 $(function() {
-	var url =  contextPath + '/selectPositionData.do';
+
+	
+	//지도 내용 가져와서 표시하기
+	/*var url =  contextPath + '/selectPositionData.do';
+	$.ajax({
+		type : "POST",
+		//data : data,
+		url : url,
+		contentType : "application/x-www-form-urlencoded",
+		dataType : "json",
+		success : function(d) {
+			result = d.resultList;
+			//console.log(result);
+			//console.log(homeData.searchResult.homeData);
+			homeData.searchResult.homeData = result;
+
+						
+		}
+	});
+*/	
+	
+});
+
+function getRoomList(updateList){
+	
+	$("#roomList").html("");
+	
+	if(updateList.length ==0){
+		var str = '<div style = "height : 14px;"></div>';
+		str += '<p>  해당 매물이 존재하지 않습니다.  </p>';
+		$("#roomList").html(str);
+		return;
+	}
+	
+	var url =  contextPath + '/selectRoomData.do';
+	var data = {"update":updateList};
+	
+	jQuery.ajaxSettings.traditional = true;
+
 	$.ajax({
 		type : "POST",
 		data : data,
@@ -11,81 +49,35 @@ $(function() {
 		success : function(d) {
 			result = d.resultList;
 			console.log(result);
-			console.log(homeData.searchResult.homeData);
-			homeData.searchResult.homeData = result;
 			
+			var str = "";
+			str += '<div style = "height : 14px;"></div>';
 			
-			var map = new naver.maps.Map('map', {
-				   	scaleControl: false,
-					logoControl: false,
-					mapDataControl: false,
-					zoomControl: true,
-				    center: new naver.maps.LatLng(37.5664749, 126.9778207),
-				    zoom: 10,
-				    mapTypeControl: true
-			});
-			naver.maps.Event.addListener(map, 'idle', function() {
-			    updateMarkers(map, make);
-			});
-
-			//클러스터 기능 
-			var markers = [],
-			    data = homeData.searchResult.homeData;
-			for (var i = 0, ii = data.length; i < ii; i++) {
-			    var spot = data[i],
-			        latlng = new naver.maps.LatLng(spot.grd_la, spot.grd_lo),
-			        marker = new naver.maps.Marker({
-			            position: latlng,
-			            draggable: true
-			        });
-			    markers.push(marker);
+			for(var i = 0; i < result.length; i++){
+				str += '<div class= "roomModel" style = "background-color : #E6FFFF; width : 100%; height : 120px; padding : 10px 10px 10px 7px; margin : 0 0 15px 0;">'+
+                    '<input type="hidden" class="loc" value="'+result[i].grd_la+'_'+result[i].grd_lo+'">'+
+					'<img src="'+result[i].image+'" width = "100px" height = "100px" style = "float: left; margin : 0 10px 0 3px;" ></img>'+
+                    '<div style="color : black; font-size : 1.5em; font-weight:bold; margin : 0 0 3px 0">월세 150/22</div>'+
+                    '<div style="color : gray; margin : 0 0 3px 0">'+result[i].address+'</div>'+
+                    '<div style="color : black">집 설명</div></div>';
 			}
-			var htmlMarker1 = {
-			        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/img/cluster-marker-1.png);background-size:contain;"></div>',
-			        size: N.Size(40, 40),
-			        anchor: N.Point(20, 20)
-			    },
-			    htmlMarker2 = {
-			        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/img/cluster-marker-2.png);background-size:contain;"></div>',
-			        size: N.Size(40, 40),
-			        anchor: N.Point(20, 20)
-			    },
-			    htmlMarker3 = {
-			        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/img/cluster-marker-3.png);background-size:contain;"></div>',
-			        size: N.Size(40, 40),
-			        anchor: N.Point(20, 20)
-			    },
-			    htmlMarker4 = {
-			        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/img/cluster-marker-4.png);background-size:contain;"></div>',
-			        size: N.Size(40, 40),
-			        anchor: N.Point(20, 20)
-			    },
-			    htmlMarker5 = {
-			        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(images/img/cluster-marker-5.png);background-size:contain;"></div>',
-			        size: N.Size(40, 40),
-			        anchor: N.Point(20, 20)
-			    };
-			var markerClustering = new MarkerClustering({
-			    minClusterSize: 2,
-			    maxZoom: 8,
-			    map: map,
-			    markers: markers,
-			    disableClickZoom: false,
-			    gridSize: 120,
-			    icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
-			    indexGenerator: [10, 100, 200, 500, 1000],
-			    stylingFunction: function(clusterMarker, count) {
-			        $(clusterMarker.getElement()).find('div:first-child').text(count);
-			    }
+			
+			$("#roomList").html(str);
+			
+			$('.roomModel').mouseenter(function(event){
+				console.log($(event.target).children(".loc")[0].value);
+				var temp =  $(event.target).children(".loc")[0].value;
+				var loc = temp.split("_");
+				var poi = new naver.maps.Point(loc[1],loc[0]);
+				//infoWindow.open(map, point);
+				/*var mark = new naver.maps.Marker({
+		            position: poi
+		        });
+				naver.maps.Event.trigger(mark, 'click'); 
+				*/
+				
 			});
-
-			// 검색기능 
-			var bounds = map.getBounds(),
-			southWest = bounds.getSW(),
-			northEast = bounds.getNE(),
-			lngSpan = northEast.lng() - southWest.lng(),
-			latSpan = northEast.lat() - southWest.lat();
-
+			
 		}
-	});
-});
+	});	
+}
