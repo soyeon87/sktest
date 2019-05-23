@@ -66,10 +66,10 @@ function getRoomList(updateList){
 			
 			$('.roomModel').mouseenter(function(event){
 				console.log($(event.target).children(".loc")[0].value);
-				var temp =  $(event.target).children(".loc")[0].value;
-				var loc = temp.split("_");
+				var tem =  $(event.target).children(".loc")[0].value;
+				var loc = tem.split("_");
 				var poi = new naver.maps.Point(loc[1],loc[0]);
-				//infoWindow.open(map, point);
+				infoWindow.open(map, poi);
 				/*var mark = new naver.maps.Marker({
 		            position: poi
 		        });

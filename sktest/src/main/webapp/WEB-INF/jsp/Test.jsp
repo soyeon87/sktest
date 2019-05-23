@@ -68,7 +68,7 @@
     
     
 <!-- 헤더 > 로고 -->
-   
+
    <style>
       .logo {
          float: left;
@@ -108,6 +108,26 @@
        }
    </style>    
 
+   
+	<style>
+	/*
+	<!-- <img alt="이미지가없어요" src="img/logo.png" width = "350" height = "200";
+		style="position: absolute;" onclick = "location.href = 'main.html'"> -->
+	*/
+		.logo {
+		float: left;
+		width: 489px;
+		height: 95px;
+		margin: 10px 0 0 0;
+		background: url('images/img/logo.png'); no-repeat;
+	 	text-indent: -9999px;
+	 	position : absolute;
+	 	left : 40px;
+	 	top : 10px;
+ 		overflow: hidden;
+ 		}
+	</style>    
+	
 <!-- 헤더 > 메뉴(1) -->
     <style>
         #firstNav > ul { overflow: hidden; } 
@@ -181,6 +201,7 @@
       #firstNav > ul > li:last-child > a { border-right: 2px solid #dfdfdf; }
     </style>
 </head>
+
 <body style = "background-color : #FFFFFF">
    
    <input type="hidden" id="positionList" value='${resultList}'/>
@@ -289,6 +310,9 @@
    <br/>
    <br/>
    </div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.slides.min.js"></script>
 
 </body>
 </html>
