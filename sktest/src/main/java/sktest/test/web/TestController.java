@@ -28,11 +28,29 @@ public class TestController {
 		return "/Test";
 	}
 	
+	@RequestMapping(value = "/register.do")
+	public String register(HttpServletRequest request, Model model) throws Exception{
+		return "/register";
+	}
+	
 	@RequestMapping(value = "/selectPositionData.do")
 	@ResponseBody
 	public Object selectPositionData(HttpServletRequest request){
 		try {
 			Map resultMap = testService.selectPositionData(request);
+			return resultMap;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@RequestMapping(value = "/selectPreferPositionData.do")
+	@ResponseBody
+	public Object selectPreferPositionData(HttpServletRequest request){
+		try {
+			Map resultMap = testService.selectPreferPositionData(request);
 			return resultMap;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -60,6 +78,34 @@ public class TestController {
 		try {
 			Map resultMap = testService.selectSubwayPosition(request);
 			return resultMap;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@RequestMapping(value = "/selectWeightList.do")
+	@ResponseBody
+	public Object selectWeightList(HttpServletRequest request){
+		try {
+			Map resultMap = testService.selectWeightList(request);
+			return resultMap;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	//등록페이지
+	@RequestMapping(value = "/insertRoom.do")
+	@ResponseBody
+	public String insertRoom(HttpServletRequest request){
+		try {
+			String result = testService.insertRoom(request);
+			return result;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

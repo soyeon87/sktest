@@ -6,15 +6,25 @@
    	<select id="testDao.getPositionData" 
 		parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
 		remapResults="true">
-			SELECT name, concat(longitude) as grd_lo, concat(latitude) as grd_la, address
-			FROM map_position
+			SELECT num, concat(x) as grd_lo, concat(y) as grd_la, address, image, grade, deposit, rent, title
+			FROM ROOM_INFO
+			limit 100
 	</select>
 
+	<select id="testDao.getPreferPositionData" 
+		parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
+		remapResults="true">
+			SELECT num, concat(x) as grd_lo, concat(y) as grd_la, address, image, grade, deposit, rent, title
+			FROM ROOM_INFO
+			WHERE grade in (1,2)
+			limit 100
+	</select>
+	
 	<select id="testDao.getRoomData" 
 		parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
 		remapResults="true">
-			SELECT name, concat(longitude) as grd_lo, concat(latitude) as grd_la, address, image
-			FROM map_position
+			SELECT num, concat(x) as grd_lo, concat(y) as grd_la, address, image, grade, deposit, rent, title
+			FROM ROOM_INFO
 			<isNotEmpty  property="location">
        			<iterate prepend="WHERE location in" property="location" open="(" close=")" conjunction=",">
             		#location[]#
@@ -30,5 +40,29 @@
 			WHERE NAME LIKE concat('%',#value#,'%') 
 			LIMIT 1
 	</select>
+	
+	<select id="testDao.getWeightList" 
+		parameterClass="HashMap" resultClass="java.util.LinkedHashMap"
+		remapResults="true">
+			SELECT concat(dong_x) as grd_lo, concat(dong_y) as grd_la, dong_score
+			FROM test_sung.dong_score
+	</select>
+	
+	
+	
+	<!--등록 페이지 -->
+	<select id="testDao.getMaxNum"  resultClass="HashMap"
+		remapResults="true">
+			SELECT max(num) as num_cnt, concat(max(CONVERT(code, UNSIGNED))) as code_cnt
+			FROM ROOM_INFO
+	</select>
+	
+	<insert id="testDao.insertRoom" parameterClass="HashMap">
+        	INSERT INTO ROOM_INFO
+	        VALUES(#num#,#x#,#y#,#address#,#cctv#,#doorlock#,#security#,#window_guard#,
+	        #subway_dist#,#csv_dist#,#pol_dist#,#wroad_yn#,#grade#,#code#,#building_type#,
+	        #deposit#,#floor#,#floor_all#,#image#,#rent#,#room_type#,#title#,#location#);
+    </insert>
+	
 	
 </sqlMap>

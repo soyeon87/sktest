@@ -13,14 +13,14 @@ var homeData = {
 	}
 
 var map = new naver.maps.Map('map', {
-	   	scaleControl: false,
-		logoControl: false,
-		mapDataControl: false,
+	   	//scaleControl: false,
+		//logoControl: false,
+		//mapDataControl: false,
 		zoomControl: true,
-		center: new naver.maps.LatLng(37.5657037, 126.9768616),
+		center: new naver.maps.LatLng(37.5520188,126.9227418),//합정동 중심으로 셋팅
 		minZoom : 1,
-	    zoom: 10,
-	    mapTypeControl: true
+	    zoom: 10
+	    //mapTypeControl: true
 });
 
 
@@ -34,16 +34,40 @@ homeData.searchResult.homeData = JSON.parse(positionList);
 var markers = [],
     data = homeData.searchResult.homeData;
 for (var i = 0, ii = data.length; i < ii; i++) {
-    var spot = data[i],
+    var spot = data[i], 
         latlng = new naver.maps.LatLng(spot.grd_la, spot.grd_lo),
         marker = new naver.maps.Marker({
             position: latlng
         });
     
+    var title = spot.title;
+    if(title.length >15){
+    	title = title.substring(0,15)+".."; 
+    }
+    var price = "";
+    if(spot.rent == 0){
+    	price = "(전세) "+spot.deposit+"만원";
+    }else{
+    	price = "(월세) "+spot.deposit+'/'+spot.rent+"만원";
+    }
+    
+    var mark = "";
+    if(spot.grade <= 2){
+		mark = '<img src="images/img/logo_final.png" width = "20px" height = "20px" style = "float: right;"></img>';
+	}else{
+		mark = "";
+	}
+    
+    var con = '<div style="width:300px; height:90px; padding:10px;">'+
+    	'<div style="width:25%; float:left;">'+
+    	'<img src="'+spot.image+'" style="width:100%;height:70px;"></img></div>'+
+    	'<div style="width:75%; float:right; padding:5px 0 5px 10px;">'+
+    	'<text style="font-weight: bold; font-size: large;">'+price+mark+'</text>'
+    	+'<br>'+spot.address+'<br>'+title
+    	+'</div></div>';
     //각각의 마커정보 
     var infoWindow = new naver.maps.InfoWindow({
-        content: '<div style="width:200px;text-align:center;padding:10px;">이름 : '
-        	+spot.name+'<br>주소 : '+spot.address+'</div>'
+        content: con
     });
 
     markers.push(marker);
@@ -80,7 +104,7 @@ var htmlMarker1 = {
 
 var markerClustering = new MarkerClustering({
     minClusterSize: 1,
-    maxZoom: 15,
+    maxZoom: 8,
     map: map,
     markers: markers,
     disableClickZoom: false,
@@ -114,7 +138,7 @@ function updateMarkers(map, markers) {
         	var temp = String(position.x);
         	var com1 = temp.split(".");
         	if(com1[1].length < 7){
-        		for(var j = 0; j < (7 - com1[1].length) ; j++){
+        		for(var k = com1[1].length+1 ; k <= 7 ; k++){
         			com1[1] += "0";
         		}
         	}
@@ -123,15 +147,16 @@ function updateMarkers(map, markers) {
         	var com2 = temp2.split(".");
         	
         	if(com2[1].length < 7){
-        		for(var j = 0; j < (7 - com2[1].length); j++){
+        		for(var k = com2[1].length+1 ; k <= 7 ; k++){
         			com2[1] += "0";
         		}
         	}
         	
-        	updateList.push(com2[0]+"."+com2[1]+com1[0]+"."+com1[1]);
+        	updateList.push(com1[0]+"."+com1[1]+com2[0]+"."+com2[1]);
         }
     }
     //매물 목록 불러오기 함수 실행
+    //console.log(updateList);
     getRoomList(updateList);
 }
 
@@ -150,6 +175,7 @@ function getClickHandler(seq) {
 }
 
 for (var i=0, ii=markers.length; i<ii; i++) {
+	markerList.push(markers[i].position.x+"_"+markers[i].position.y);
     naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 }
 
@@ -171,16 +197,17 @@ function searchAddressToCoordinate(address) {
 						if (status === naver.maps.Service.Status.ERROR) {
 							return alert('잘못된 검색어 입니다.');
 						}
+						
 						//검색 반응 
 						var find = response.result.userquery.replace(/ /gi,"");
-						
-						var location;
-						var url =  contextPath + '/selectSubwayPosition.do';
-						var data = {"value" : find};
 						
 						if (find.length <= 1) { // 잘못된 입력값일때 
 							return alert('잘못된 검색어 입니다.');
 						}
+						
+						var location;
+						var url =  contextPath + '/selectSubwayPosition.do';
+						var data = {"value" : find};
 						
 						$.ajax({
 							type : "POST",
@@ -250,8 +277,15 @@ function initGeocoder() {
 
 	$('#execute').on('click', function(e) {
 		e.preventDefault();
-		searchAddressToCoordinate($('#search').val());
+		var str = $('#search').val();
+		str = str.trim();
+		if (str != null && str != ""){
+			searchAddressToCoordinate($('#search').val());	
+		}else{
+			alert("원하는 지역명, 지하철역을 입력해주세요.");
+		}
 	});
 }
 
 naver.maps.onJSContentLoaded = initGeocoder;
+

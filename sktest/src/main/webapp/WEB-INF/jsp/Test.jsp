@@ -7,15 +7,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
 
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ddyhcaahk1&submodules=geocoder"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ddyhcaahk1&submodules=visualization&submodules=geocoder"></script>
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <script src="${pageContext.request.contextPath}/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/Test/test.js" charset='utf-8'></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/Test/MarkerClustering.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/Test/test.js" charset='utf-8'></script>
 
-<title>::여성 안심 거주 플랫폼</title>
-    <title>여성 안심 거주 플랫폼::</title>
+<title>니가 사는 그집</title>
+    <title>니가 사는 그집</title>
 
     <style>
       @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
@@ -70,12 +70,12 @@
 <!-- 헤더 > 로고 -->
 
    <style>
-      .logo {
+		.logo {
          float: left;
-         width: 55px;
-         height: 56px;
-         margin: 0 0 0 190px;
-         background: url('images/img/logo_s.png'); no-repeat;
+         width: 90px;
+         height: 63px;
+         margin: 0 0 0 140px;
+         background: url('images/img/logo_final.png'); no-repeat;
           text-indent: -9999px;
           position : absolute;
           left : 40px;
@@ -94,10 +94,12 @@
           float: left;
          width: 220px;
          height: 120px;
+         font-weight:bold;
+         font-size:1.5em;
+         color : orangered;
          margin: 20px 0 0 240px;
           position : absolute;
           left : 40px;
-          
           overflow: hidden;
           font-size : 1.3em;
        }
@@ -108,26 +110,7 @@
        }
    </style>    
 
-   
-	<style>
-	/*
-	<!-- <img alt="이미지가없어요" src="img/logo.png" width = "350" height = "200";
-		style="position: absolute;" onclick = "location.href = 'main.html'"> -->
-	*/
-		.logo {
-		float: left;
-		width: 489px;
-		height: 95px;
-		margin: 10px 0 0 0;
-		background: url('images/img/logo.png'); no-repeat;
-	 	text-indent: -9999px;
-	 	position : absolute;
-	 	left : 40px;
-	 	top : 10px;
- 		overflow: hidden;
- 		}
-	</style>    
-	
+ 
 <!-- 헤더 > 메뉴(1) -->
     <style>
         #firstNav > ul { overflow: hidden; } 
@@ -200,6 +183,7 @@
         }
       #firstNav > ul > li:last-child > a { border-right: 2px solid #dfdfdf; }
     </style>
+    
 </head>
 
 <body style = "background-color : #FFFFFF">
@@ -208,7 +192,7 @@
    
    <header style = "position : relative">
       <a href= "main.html" class="logo">Logo</a>
-      <a class="logo_text">&nbsp;&nbsp;여성 안심 <br/>거주 플랫폼</a>
+      <a class="logo_text">니가 사는 그집</a>
       
       <nav id="firstNav">
          <ul>
@@ -217,11 +201,11 @@
       <nav id="secondNav">
          <ul>
             <li><a href="Home.html">홈으로</a>
-            <li><a href="dlstk.html">인사말</a>
-            <li><a href="dhtl.html">오시는 길</a></li>
-            <li><a href="emdfhr.html">등록절차</a></li>
-            <li><a href="rkdlq.html">가입안내</a></li>
-            <li><a href="mail.jsp">문의하기</a></li>
+            <li><a href="dlstk.html">상세 정보</a>
+            <li><a id = "regi">매물 등록</a></li>
+            <li><a href="emdfhr.html">등록 절차</a></li>
+            <li><a href="rkdlq.html">가입 안내</a></li>
+            <li><a href="mail.jsp">문의 하기</a></li>
          </ul>
       </nav>
    </header>
@@ -240,24 +224,29 @@
                         <div class="col-md-5" id="placeDiv">
                            <form>
                                 <div class="form-inline">
-                                    <input type="text" id="search" style = "margin : 0 0 0 3%;" class="form-control" name="search"
-                                        placeholder="원하는 지역명, 지하철역을 입력해주세요." autocomplete=off/>
+                                    <input type="text" id="search" style = "margin : 0 0 0 1%;width:43%;" class="form-control" name="search"
+                                        placeholder="원하는 지역명, 지하철역을 입력" autocomplete=off/>
                                     <input type="button" id="execute"
                                         class="form-control btn btn-default" value="확인"/>
+                                    
+                                   	<!-- <input type="button" id="preferBtn" value="ON" style="color:blue" onclick="toggle(this);"> -->    
                                    	<div class="btn-group" role="group" aria-label="..." style="float:left">
-                                		<button type="button" class="btn btn-default">추천On</button>
-                               			<button type="button" class="btn btn-default">추천Off</button>
-                           			</div>        
+                                		<input id="preferBtn" type="button" class="btn btn-default" 
+                                		style="margin:0px 10px 0px 0px;" value="추천 OFF"></input>
+                               			<input id="weightBtn" type="button" class="btn btn-default" 
+                                		style="margin:0px 10px 0px 0px;" value="가중치 OFF"></input>
+                                	</div>        
                                 </div>
                                <div style = "margin:0 0 3px 0;">
                                </div>
                      		</form>
-                       	<div id="roomList" style = "overflow:auto; border: 1.5px solid #660033; height : 467px;">
+                       	<div id="roomList" style = "overflow:auto; border: 1.5px solid #E1E1E1; height : 467px;">
                              <div style = "height : 14px;"></div>
                             
-                            <div class= "roomModel" style = "background-color : #E6FFFF; width : 100%; height : 120px; padding : 10px 10px 10px 7px; margin : 0 0 15px 0;">
+                            <div class= "roomModel" style = "background-color : #FFE400; width : 100%; height : 120px; padding : 10px 10px 10px 7px; margin : 0 0 15px 0;">
                               <img src="images/img/room1.jpg" width = "100px" height = "100px" style = "float: left; margin : 0 10px 0 3px;" ></img>
-                              <div style="color : black; font-size : 1.5em; font-weight:bold; margin : 0 0 3px 0">월세 150/22</div>
+                              <div style="color : black; font-size : 1.5em; font-weight:bold; margin : 0 0 3px 0">월세 150/22
+                              <img src="images/img/logo_final.png" width = "50px" height = "30px" style = "float: right;"></img></div>
                               <div style="color : gray; margin : 0 0 3px 0">경기도 화성시 방교동 투룸</div>
                               <div style="color : black">♥공원뷰 가능한 넓은 투룸전세, 전세자금…대출대출대출대출대출대출</div>
                            </div>
@@ -310,9 +299,6 @@
    <br/>
    <br/>
    </div>
-
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="js/jquery.slides.min.js"></script>
 
 </body>
 </html>
